@@ -2,6 +2,7 @@ package com.metastack.invoiceapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -14,6 +15,14 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var loginRedirectText: TextView
 
     private lateinit var auth: FirebaseAuth
+
+    private fun isValidEmail(email: String): Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    private fun isValidPassword(password: String): Boolean {
+        return password.length >= 6 && password.any { !it.isLetterOrDigit() }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +39,13 @@ class SignupActivity : AppCompatActivity() {
             val email = emailEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
 
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            if (!isValidEmail(email)) {
+                Toast.makeText(this, "Invalid email format", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!isValidPassword(password)) {
+                Toast.makeText(this, "Password must be at least 6 characters and include a special character", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 

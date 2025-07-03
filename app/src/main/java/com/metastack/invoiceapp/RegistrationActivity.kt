@@ -2,6 +2,7 @@ package com.metastack.invoiceapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -20,6 +21,10 @@ class RegistrationActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
+
+    private fun isValidMobile(number: String): Boolean = number.length == 10 && number.all { it.isDigit() }
+    private fun isValidGST(gst: String): Boolean = gst.length == 15 && gst.all { it.isLetterOrDigit() }
+    private fun isValidPAN(pan: String): Boolean = pan.length == 10 && pan.all { it.isLetterOrDigit() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +50,23 @@ class RegistrationActivity : AppCompatActivity() {
             val addr = address.text.toString().trim()
             val email = auth.currentUser?.email ?: ""
 
-            if (name.isEmpty() || phone.isEmpty() || business.isEmpty()) {
-                Toast.makeText(this, "Please fill in all required fields", Toast.LENGTH_SHORT).show()
+            if (name.isEmpty() || business.isEmpty()) {
+                Toast.makeText(this, "Full name and business name are required", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!isValidMobile(phone)) {
+                Toast.makeText(this, "Invalid mobile number", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!isValidGST(gstNo)) {
+                Toast.makeText(this, "Invalid GST number (15 alphanumeric characters)", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!isValidPAN(panNo)) {
+                Toast.makeText(this, "Invalid PAN number (10 alphanumeric characters)", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
