@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.metastack.invoiceapp.ZoomLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/zoomRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@android:color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Complete Your Registration"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:paddingBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/fullNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Full Name" />
+
+            <EditText
+                android:id="@+id/mobileEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mobile Number"
+                android:inputType="phone"
+                android:layout_marginTop="12dp" />
+
+            <EditText
+                android:id="@+id/businessEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Business Name"
+                android:layout_marginTop="12dp" />
+
+            <EditText
+                android:id="@+id/gstEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="GST Number"
+                android:layout_marginTop="12dp" />
+
+            <EditText
+                android:id="@+id/panEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="PAN Number"
+                android:layout_marginTop="12dp" />
+
+            <EditText
+                android:id="@+id/addressEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Address"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="12dp" />
+
+            <Button
+                android:id="@+id/registerButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="#6200EE"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+    </ScrollView>
+</com.metastack.invoiceapp.ZoomLayout>
